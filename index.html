@@ -18,7 +18,7 @@
             text-align: center; /* Center text inside the container */
             background: white; /* Background color for the container */
             padding: 20px; /* Padding around the content */
-            border-radius: 8px; /* Rounded corners lol */
+            border-radius: 8px; /* Rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
     </style>
@@ -34,7 +34,12 @@
             document.getElementById('buyPrice').textContent = `Harga beli: ${buyPrice}`;
         }
 
-        window.onload = fetchGoldPrices;
+        function refreshPage() {
+            fetchGoldPrices(); // Fetch new prices
+            setTimeout(refreshPage, 3600000); // Refresh every hour
+        }
+
+        window.onload = refreshPage; // Start fetching prices when the page loads
     </script>
 </head>
 <body>
