@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column; /* Stack items vertically */
             justify-content: center; /* Center horizontally */
             align-items: center; /* Center vertically */
             height: 100vh; /* Full height of the viewport */
@@ -20,9 +21,16 @@
             padding: 20px; /* Padding around the content */
             border-radius: 8px; /* Rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin-bottom: 20px; /* Space below the container */
+        }
+        .countdown {
+            font-size: 1.5em; /* Larger font for countdown */
+            color: #333; /* Text color */
         }
     </style>
     <script>
+        let countdown; // Variable to hold the countdown timer
+
         async function fetchGoldPrices() {
             const response = await fetch('https://logam-mulia-api.vercel.app/prices/hargaemas-com');
             const data = await response.json();
@@ -34,12 +42,30 @@
             document.getElementById('buyPrice').textContent = `Harga beli: ${buyPrice}`;
         }
 
-        function refreshPage() {
-            fetchGoldPrices(); // Fetch new prices
-            setTimeout(refreshPage, 3600000); // Refresh every hour
+        function startCountdown(duration) {
+            let timer = duration, minutes, seconds;
+            countdown = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                // Add leading zero to seconds
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                document.getElementById('countdown').textContent = `${minutes}:${seconds}`;
+
+                // When the timer reaches zero
+                if (--timer < 0) {
+                    clearInterval(countdown); // Stop the countdown
+                    fetchGoldPrices(); // Fetch new prices
+                    startCountdown(3600); // Restart the countdown for 1 hour
+                }
+            }, 1000); // Update every second
         }
 
-        window.onload = refreshPage; // Start fetching prices when the page loads
+        window.onload = function () {
+            fetchGoldPrices(); // Fetch initial prices
+            startCountdown(3600); // Start countdown for 1 hour (3600 seconds)
+        };
     </script>
 </head>
 <body>
@@ -48,5 +74,6 @@
         <p id="sellPrice">Harga jual: </p>
         <p id="buyPrice">Harga beli: </p>
     </div>
+    <div class="countdown" id="countdown">60:00</div>
 </body>
 </html>
