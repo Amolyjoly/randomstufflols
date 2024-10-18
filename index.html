@@ -4,30 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harga Emas Antam</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full height of the viewport */
+            margin: 0; /* Remove default margin */
+            font-family: Arial, sans-serif; /* Set font style */
+            background-color: #f4f4f4; /* Background color */
+        }
+        .container {
+            text-align: center; /* Center text inside the container */
+            background: white; /* Background color for the container */
+            padding: 20px; /* Padding around the content */
+            border-radius: 8px; /* Rounded corners lol */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+    </style>
     <script>
         async function fetchGoldPrices() {
-            try {
-                const response = await fetch('https://logam-mulia-api.vercel.app/prices/hargaemas-com');
-                const data = await response.json();
+            const response = await fetch('https://logam-mulia-api.vercel.app/prices/hargaemas-com');
+            const data = await response.json();
 
-                const sellPrice = data.data[0].sell;
-                const buyPrice = data.data[0].buy;
+            const sellPrice = data.data[0].sell;
+            const buyPrice = data.data[0].buy;
 
-                document.getElementById('sellPrice').textContent = `Harga jual: ${sellPrice}`;
-                document.getElementById('buyPrice').textContent = `Harga beli: ${buyPrice}`;
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                document.getElementById('sellPrice').textContent = 'Error fetching harga jual';
-                document.getElementById('buyPrice').textContent = 'Error fetching harga beli';
-            }
+            document.getElementById('sellPrice').textContent = `Harga jual: ${sellPrice}`;
+            document.getElementById('buyPrice').textContent = `Harga beli: ${buyPrice}`;
         }
 
         window.onload = fetchGoldPrices;
     </script>
 </head>
 <body>
-    <h1>Harga Emas Mulia Antam</h1>
-    <p id="sellPrice">Harga jual: Loading...</p>
-    <p id="buyPrice">Harga beli: Loading...</p>
+    <div class="container">
+        <h1>Harga Emas Mulia Antam</h1>
+        <p id="sellPrice">Harga jual: </p>
+        <p id="buyPrice">Harga beli: </p>
+    </div>
 </body>
 </html>
