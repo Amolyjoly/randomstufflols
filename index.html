@@ -17,16 +17,18 @@
         }
         .reminder {
             position: absolute; /* Position it above everything else */
-            top: 20px; /* Space from the top */
+            top: 400px; /* Adjust this value to position it directly on top of the box */
             left: 50%; /* Center horizontally */
-            transform: translateX(-50%) rotate(-10deg); /* Center and tilt the text */
-            font-size: 2.5em; /* Larger font size */
-            color: rgba(255, 0, 0, 0.7); /* Red color with transparency */
+            transform: translateX(-50%); /* Center the text */
+            font-size: 1em; /* Smaller font size */
+            color: rgba(255, 0, 0, 0.5); /* Red color with transparency */
             text-align: center; /* Center text */
+            font-style: italic; /* Italic font style */
             pointer-events: none; /* Ignore mouse events */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for better visibility */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for better visibility */
         }
         .container {
+            position: relative; /* Position relative to allow absolute positioning of child elements */
             text-align: center; /* Center text inside the container */
             background: white; /* Background color for the container */
             padding: 20px; /* Padding around the content */
@@ -37,12 +39,16 @@
         .countdown {
             font-size: 1.5em; /* Larger font for countdown */
             color: #333; /* Text color */
-            margin-top: 20px; /* Space above the countdown */
+            margin-top: 10px; /* Space above the countdown */
+            position: relative; /* Allow positioning adjustments */
+            top: -10px; /* Move countdown slightly up */
         }
         .footer {
             font-size: 1em; /* Font size for the footer */
             color: #555; /* Lighter text color */
-            margin-top: 10px; /* Space above the footer */
+            margin-top: 5px; /* Slightly move footer up */
+            position: relative; /* Allow positioning adjustments */
+            top: -10px; /* Move footer slightly up */
         }
     </style>
     <script>
